@@ -2,7 +2,7 @@
    CONFIGURACIÓN PRINCIPAL
 ============================================ */
 const CONFIG = {
-    videoId: 'iY-6SP_hS3o',  // ID del video de YouTube
+    videoId: 'boA7r9_aTyk',  // ID del video de YouTube
     eventDate: '2026-11-21T22:30:00',  // Fecha del evento
     coupleNames: 'GASPAR & VALERIA',  // Nombres de los novios
     welcomeMessage: '¡NOS CASAMOS!',  // Mensaje de bienvenida
@@ -70,7 +70,7 @@ function onYouTubeIframeAPIReady() {
             'playlist': CONFIG.videoId,
             'enablejsapi': 1,
             'mute': 0,
-            'start': 13,
+            'start': 14,
             'origin': origin
         },
         events: {
