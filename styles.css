@@ -1,0 +1,1279 @@
+/* ============================================
+   VARIABLES GLOBALES Y RESET
+============================================ */
+:root {
+    --color-principal: rgb(53, 63, 46);
+    --color-secundario: #6a7462;
+    --color-texto: #2C2C2C;
+    --color-blanco: #FFFFFF;
+    --color-fondo: #F8F8F6;
+    --fuente-principal: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Definimos la animación */
+@keyframes aparecerNiebla {
+  0% {
+    opacity: 0;
+    filter: blur(20px); /* Mucho desenfoque al inicio */
+    transform: scale(0.9); /* Un poco más pequeño para dar profundidad */
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px); /* Nitidez total */
+    transform: scale(1); /* Tamaño original */
+  }
+}
+
+/* Aplicamos la animación a la tarjeta */
+#welcomeScreen, #nombreInvitado {
+  animation: aparecerNiebla 1s ease-out forwards;
+  /* 2.5s es la duración, podés ajustarlo para que sea más lento o rápido */
+}
+
+/* ============================================
+   OVERLAY DE IMAGEN
+============================================ */
+.image-placeholder {
+    position: relative;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.overlay-text {
+    color: var(--color-blanco);
+    font-size: 4rem;
+    font-weight: 100;
+    text-align: center;
+    font-family: var(--fuente-principal);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .overlay-text {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .overlay-text {
+        color: silver;
+        font-size: 2.5rem;
+        font-family: system-ui;
+        letter-spacing: 1px;
+    }
+}
+
+/* ============================================
+   PANTALLA DE BIENVENIDA
+============================================ */
+#welcomeScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: var(--color-principal);
+    height: 100vh;
+    /* background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-secundario) 100%); */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+    transition: opacity 1s ease-out;
+}
+
+#welcomeScreen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#welcomeHeader {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 1s ease-out;
+}
+
+#welcomeHeader h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--color-principal);
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+#welcomeHeader h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-principal);
+    letter-spacing: 2px;
+}
+
+/* Tarjeta tipo sobre */
+#envelope {
+    background: var(--color-blanco);
+    padding: 40px 50px;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid black;
+    text-align: center;
+    width: 100%;
+}
+
+#envelope p {
+    color: var(--color-principal);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    letter-spacing: 1px;
+}
+
+#envelope strong {
+    display: block;
+    margin-top: 15px;
+    font-size: 1.3rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+/* Texto flotante inferior */
+.footer-floating {
+    position: absolute;
+    bottom: 50px;
+    font-size: 0.9rem;
+    color: var(--color-principal);
+    letter-spacing: 2px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+/* ============================================
+   SECCIÓN DE IMAGEN PRINCIPAL
+============================================ */
+.image-section {
+    width: 100%;
+    min-height: 60vh;
+    background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-secundario) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-placeholder img {
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+}
+
+/* ============================================
+   CONTADOR REGRESIVO
+============================================ */
+.countdown-section {
+    background: var(--color-principal);
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-number {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--color-blanco);
+    min-width: 80px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.countdown-label {
+    font-size: 1.3rem;
+    color: var(--color-blanco);
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+/* ============================================
+   SECCIÓN DE FRASE
+============================================ */
+.quote-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--color-fondo);
+}
+
+.quote-text {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--color-principal);
+    max-width: 800px;
+    margin: 0 auto;
+    letter-spacing: 1px;
+    line-height: 1.8;
+}
+
+.separator {
+    width: 80px;
+    height: 2px;
+    background: var(--color-principal);
+    margin: 20px auto;
+}
+
+/* ============================================
+   INFORMACIÓN DEL EVENTO
+============================================ */
+.event-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    padding: 60px 40px;
+    background: var(--color-blanco);
+}
+.event-location{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    padding: 60px 40px;
+    background: var(--color-principal);
+}
+
+.info-card {
+    text-align: center;
+    padding: 30px;
+}
+
+.info-icon {
+    margin-bottom: 20px;
+}
+
+.info-card h4 {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--color-principal);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.event-location h4 {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--color-fondo);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.info-card p {
+    font-size: 1.1rem;
+    color: var(--color-principal);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.event-location p {
+    font-size: 1.1rem;
+    color: var(--color-fondo);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* ============================================
+   VERSÍCULO BÍBLICO
+============================================ */
+
+/* ============================================
+   CARRUSEL DE FOTOS Y VIDEOS
+============================================ */
+.media-carousel {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.media-carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.media-slide {
+    min-width: 100%;
+    flex-shrink: 0;
+}
+
+.media-slide img,
+.media-slide video {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.media-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    color: var(--color-blanco);
+    border: none;
+    font-size: 1.5rem;
+    padding: 12px 16px;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.3s;
+}
+
+.media-carousel-btn:hover {
+    background: transparent;
+}
+
+.media-carousel-btn.prev {
+    left: 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.media-carousel-btn.next {
+    right: 0;
+    border-radius: 5px 0 0 5px;
+}
+
+.media-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.media-carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.media-carousel-dot.active {
+    background: var(--color-blanco);
+}
+
+@media (max-width: 480px) {
+    .media-slide img,
+    .media-slide video {
+        height: 500px;
+    }
+}
+
+/* ============================================
+   VERSÍCULO BÍBLICO (cont.)
+============================================ */
+.bible-verse {
+    padding: 70px 30px;
+    text-align: center;
+    background: var(--color-blanco);
+}
+
+.bible-verse h3 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--color-principal);
+    max-width: 900px;
+    margin: 0 auto 20px;
+    line-height: 1.9;
+}
+
+.verse-reference {
+    font-size: 1rem;
+    color: var(--color-secundario);
+    letter-spacing: 2px;
+    font-weight: 300;
+}
+
+/* ============================================
+   DRESS CODE
+============================================ */
+.dress-code {
+    background: var(--color-fondo);
+    color: var(--color-principal);
+    padding: 60px 30px;
+    text-align: center;
+}
+
+.section-prefix {
+    display: block;
+    font-size: 0.95rem;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.dress-code h4 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.divider {
+    width: 60px;
+    height: 2px;
+    background: var(--color-principal);
+    margin: 20px auto;
+}
+
+.dress-code p {
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 500px;
+    font-weight: 300;
+    margin: 0 auto;
+}
+
+/* ============================================
+   REGALOS
+============================================ */
+.gifts-section {
+    background: var(--color-principal);
+    padding: 70px 30px;
+    text-align: center;
+}
+
+.gifts-section h5 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--color-blanco);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.gifts-section p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--color-blanco);
+    max-width: 700px;
+    margin: 0 auto 30px;
+    line-height: 1.8;
+}
+
+/* ============================================
+   FOTOS
+============================================ */
+.photos-section {
+    background: var(--color-blanco);
+    padding: 70px 30px;
+    text-align: center;
+}
+
+.photos-section h5 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--color-principal);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.photos-section p {
+    font-size: 1rem;
+    color: var(--color-principal);
+    max-width: 700px;
+    margin: 0 auto 30px;
+    line-height: 1.8;
+}
+
+/* ============================================
+   INFO DEL INVITADO
+============================================ */
+.guest-info {
+    background: var(--color-blanco);
+    color: var(--color-principal);
+    padding: 50px 30px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    letter-spacing: 1px;
+}
+
+.guest-info strong {
+    font-size: 1.5rem;
+    font-weight: 300;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* ============================================
+   CONFIRMACIÓN
+============================================ */
+.confirmation-section {
+    background: var(--color-principal);
+    padding: 70px 30px;
+    text-align: center;
+}
+
+.confirmation-section h5 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--color-fondo);
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.confirmation-section p {
+    font-size: 1rem;
+    color: var(--color-fondo);
+    margin-bottom: 30px;
+}
+
+
+.confirmation-section .info-icon img {
+    color: var(--color-fondo);
+}
+
+/* ============================================
+   FIRMA DE LOS NOVIOS
+============================================ */
+.signature {
+    background: var(--color-blanco);
+    padding: 60px 30px;
+    text-align: center;
+}
+
+.signature h5 {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--color-principal);
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.signature p {
+    font-size: 0.8rem;
+    color: var(--color-principal);
+    line-height: 1.8;
+}
+
+/* ============================================
+   FOOTER
+============================================ */
+.main-footer {
+    background: var(--color-principal);
+    color: var(--color-blanco);
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer-logo {
+    margin-bottom: 20px;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-social a {
+    color: var(--color-blanco);
+    font-size: 1.8rem;
+    transition: transform 0.3s ease;
+}
+
+.footer-social a:hover {
+    transform: scale(1.2);
+}
+
+/* ============================================
+   BOTONES
+============================================ */
+.btn-modal,
+.btn-primary {
+    background: var(--color-principal);
+    color: var(--color-blanco);
+    font-family: var(--fuente-principal);
+    font-size: 0.95rem;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    padding: 15px 35px;
+    border: 1px solid var(--color-blanco);
+    border-radius: 5px;
+    width: 80%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-modal:hover,
+.btn-primary:hover {
+    background: var(--color-secundario);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(112, 127, 98, 0.3);
+}
+
+.btn-large {
+    padding: 18px 50px;
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   MODALES
+============================================ */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--color-blanco);
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    position: relative;
+    animation: slideIn 0.4s ease;
+}
+
+.modal-large {
+    max-width: 800px;
+}
+
+.modal h3 {
+    font-size: 1.7rem;
+    font-weight: 200;
+    color: var(--color-principal);
+    text-align: center;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-texto);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: var(--color-principal);
+}
+
+.modal-body {
+    padding: 20px 0;
+}
+
+/* ============================================
+   INFO DE REGALOS (en modal)
+============================================ */
+.account-info {
+    background: var(--color-fondo);
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.account-info p {
+    margin: 15px 0;
+    font-size: 1.1rem;
+    color: var(--color-texto);
+}
+
+.account-info strong {
+    color: var(--color-principal);
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* ============================================
+   CARRUSEL DE REGALOS
+============================================ */
+.modal-gifts .modal-body {
+    overflow: visible;
+}
+
+.gifts-subtitle {
+    text-align: center;
+    color: var(--color-principal);
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.gifts-carousel-container {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto 30px;
+    padding: 20px 0;
+}
+
+.gifts-carousel {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gift-card {
+    position: absolute;
+    width: 280px;
+    height: 100%;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: scale(0.8) translateX(0);
+    pointer-events: none;
+    perspective: 1000px;
+}
+
+.gift-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.gift-card.flipped .gift-card-inner {
+    transform: rotateY(180deg);
+}
+
+.gift-card-front,
+.gift-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: var(--color-blanco);
+    border: 2px solid var(--color-principal);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gift-card-back {
+    transform: rotateY(180deg);
+}
+
+.gift-card.active {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    pointer-events: auto;
+    z-index: 10;
+}
+
+.gift-card.prev {
+    opacity: 0.3;
+    transform: scale(0.85) translateX(-100%);
+    z-index: 5;
+}
+
+.gift-card.next {
+    opacity: 0.3;
+    transform: scale(0.85) translateX(100%);
+    z-index: 5;
+}
+
+.gift-icon {
+    font-size: 4rem;
+    color: var(--color-principal);
+    margin-bottom: 20px;
+}
+
+.gift-icon i {
+    display: block;
+}
+
+.gift-name {
+    font-size: 1.5rem;
+    color: var(--color-texto);
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+.gift-value {
+    font-size: 1.8rem;
+    color: var(--color-principal);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.btn-gift {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1rem;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--color-principal);
+    color: var(--color-blanco);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn:hover {
+    background: var(--color-secundario);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-prev {
+    left: -20px;
+}
+
+.carousel-next {
+    right: -20px;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+    background: var(--color-principal);
+    width: 25px;
+    border-radius: 5px;
+}
+
+.transfer-title {
+    font-weight: 600;
+    color: var(--color-principal);
+    margin-top: 25px !important;
+    margin-bottom: 10px !important;
+    font-size: 1.1rem !important;
+}
+
+.transfer-note {
+    font-size: 0.9rem !important;
+    color: #666;
+}
+
+/* Estilos para el reverso de la tarjeta */
+.back-title {
+    font-size: 1.3rem;
+    color: var(--color-principal);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.back-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.back-amount {
+    font-size: 1.6rem;
+    color: var(--color-principal);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.back-account {
+    background: var(--color-fondo);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.back-account p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+    color: var(--color-texto);
+}
+
+.back-account strong {
+    color: var(--color-principal);
+    font-weight: 600;
+}
+
+.back-note {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.btn-secondary {
+    background: var(--color-secundario);
+    color: var(--color-blanco);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: var(--fuente-principal);
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--color-principal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 480px) {
+    .gifts-carousel-container {
+        max-width: 320px;
+    }
+    
+    .gift-card {
+        width: 300px;
+        padding: 25px;
+    }
+    
+    .gift-icon {
+        font-size: 3rem;
+    }
+    
+    .gift-name {
+        font-size: 1.3rem;
+    }
+    
+    .gift-value {
+        font-size: 1.5rem;
+    }
+    
+    .carousel-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+    
+    .carousel-prev {
+        left: -10px;
+    }
+    
+    .carousel-next {
+        right: -10px;
+    }
+}
+
+/* ============================================
+   FORMULARIO DE CONFIRMACIÓN
+============================================ */
+#confirmForm {
+    padding: 20px 0;
+}
+
+.guest-section {
+    margin-bottom: 30px;
+}
+
+.guest-section h4 {
+    font-size: 1.3rem;
+    color: var(--color-principal);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-fondo);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 300;
+    color: var(--color-texto);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: var(--fuente-principal);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-principal);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+/* ============================================
+   BOTÓN DE MÚSICA FLOTANTE
+============================================ */
+#musicButton {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--color-principal);
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    z-index: 9998;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#musicButton:hover {
+    transform: scale(1.1);
+    background: var(--color-secundario);
+}
+
+/* ============================================
+   ANIMACIONES
+============================================ */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+@media (max-width: 768px) {
+    #welcomeHeader h2 {
+        font-size: 1.8rem;
+    }
+    
+    #welcomeHeader h3 {
+        font-size: 1rem;
+    }
+    
+    #envelope {
+        padding: 30px 25px;
+        margin: 15px;
+    }
+    
+    .countdown-number {
+        font-size: 2.2rem;
+        min-width: 60px;
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+    .countdown-label {
+        font-size: 0.8rem;
+    }
+    
+    .quote-text {
+        font-size: 1.1rem;
+    }
+    
+    .bible-verse h3 {
+        font-size: 1.1rem;
+    }
+    
+    .event-info {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+        gap: 20px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        margin: 10% 10px;
+        padding: 20px;
+    }
+    
+    #musicButton {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown-container {
+        gap: 15px;
+    }
+    
+    .countdown-number {
+        font-size: 1.8rem;
+        min-width: 50px;
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+    .info-card h4 {
+        font-size: 1.2rem;
+    }
+    
+    .btn-modal,
+    .btn-primary {
+        padding: 12px 25px;
+        font-size: 0.85rem;
+    }
+}

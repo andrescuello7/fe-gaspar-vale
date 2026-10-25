@@ -1,0 +1,21 @@
+# Archivos personalizables del template
+Este archivo define qué archivos deben ser modificados al personalizar el template.
+
+## Archivos de configuración
+- config.json
+
+## Contenido personalizable en HTML
+- index.html (contenido de texto y datos)
+- lista-regalos.html (información de regalos)
+
+## Estilos personalizables
+- styles.css (colores en :root)
+
+## Assets
+- assets/ (todas las imágenes y recursos)
+
+## Scripts
+- script.js (configuración y lógica)
+
+## No modificar
+- ../shared/ (recursos compartidos)

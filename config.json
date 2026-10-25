@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "event": {
+    "type": "wedding",
+    "title": "¡NOS CASAMOS!",
+    "subtitle": "Te invitamos a celebrar nuestra boda"
+  },
+  "couple": {
+    "name1": "Nadia",
+    "name2": "Pablo"
+  },
+  "date": {
+    "ceremony": "2026-09-20T18:00:00",
+    "format": "es-ES"
+  },
+  "guest": {
+    "message": "TENEMOS 1 LUGAR RESERVADO PARA VOS.",
+    "defaultName": "INVITADO ESPECIAL"
+  },
+  "location": {
+    "ceremony": {
+      "name": "Nombre del Lugar",
+      "address": "Dirección completa",
+      "mapsUrl": "https://maps.google.com"
+    },
+    "reception": {
+      "name": "Salón de Eventos",
+      "address": "Dirección del salón",
+      "mapsUrl": "https://maps.google.com"
+    }
+  },
+  "theme": {
+    "primaryColor": "#2d5f3f",
+    "secondaryColor": "#ffffff",
+    "accentColor": "#5a9371",
+    "fontFamily": "'Arial', sans-serif"
+  },
+  "features": {
+    "countdown": true,
+    "rsvp": true,
+    "giftRegistry": true,
+    "gallery": false,
+    "dressCode": true
+  },
+  "giftRegistry": {
+    "cbu": "1234567890123456789012",
+    "alias": "TU.ALIAS.MP"
+  },
+  "contact": {
+    "phone": "+1234567890",
+    "email": "contacto@ejemplo.com"
+  }
+}

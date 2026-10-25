@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaspar & Valeria - ¡Nos Casamos!</title>
+  <meta name="description" content="¡NOS CASAMOS! - Gaspar & Valeria - 21 de Noviembre 2026" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <!-- ============================================
+         PANTALLA DE BIENVENIDA
+    ============================================ -->
+  <div id="welcomeScreen">
+    <!-- Header con títulos animados -->
+    <div id="welcomeHeader">
+      <h2></h2>
+      <h3></h3>
+    </div>
+
+    <!-- Tarjeta tipo sobre con información del invitado -->
+    <div id="envelope" class="invite-card">
+      <p><strong id="nombreInvitado"></strong></p>
+      <p id="mensajeInvitado">TENEMOS UNA TARJETA<br />RESERVADA.</p>
+    </div>
+
+    <!-- Texto flotante indicando acción -->
+    <div id="footerText" class="footer-floating">
+      HACER CLIC PARA INGRESAR
+    </div>
+  </div>
+
+  <!-- ============================================
+         CONTENIDO PRINCIPAL (Oculto inicialmente)
+    ============================================ -->
+  <main id="mainContent" style="display: none">
+    <!-- Sección de imagen principal -->
+    <section class="image-section">
+      <div class="image-placeholder">
+        <img src="assets/principal.jpg" />
+        <div class="image-overlay">
+          <h2 class="overlay-text">Gaspar & Valeria</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contador regresivo -->
+    <section class="countdown-section">
+      <div class="countdown-container">
+        <div class="countdown-item">
+          <div class="countdown-number" id="days">0</div>
+          <div class="countdown-label">DÍAS</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="hours">0</div>
+          <div class="countdown-label">HORAS</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="minutes">0</div>
+          <div class="countdown-label">MINUTOS</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="seconds">0</div>
+          <div class="countdown-label">SEGUNDOS</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Frase especial con separadores -->
+    <section class="quote-section">
+      <div class="separator"></div>
+      <h3 class="quote-text">
+        CADA DÍA ESTAMOS MÁS CERCA DE EMPEZAR EL NUEVO HOGAR QUE TANTO SOÑAMOS EN DIOS
+      </h3>
+      <div class="separator"></div>
+    </section>
+
+    <!-- Información del evento: Cuándo y Dónde -->
+    <!-- Cuándo -->
+    <section class="event-info">
+      <div class="info-card">
+        <div class="info-icon">
+          <img src="https://latarjetadigital.com.ar/wp-content/uploads/2024/11/707f62-verde-oliva-oscuro-icono-3.gif"
+            alt="Calendario" width="60" />
+        </div>
+        <h4>¿CUÁNDO?</h4>
+        <p>21 DE NOVIEMBRE 2026<br />CIVIL | 22:30 HS |<br />CEREMONIA | 23:00 HS |</p>
+      </div>
+    </section>
+
+    <!-- Dónde -->
+    <section class="event-location">
+      <div class="info-card">
+        <div class="info-icon">
+          <img src="https://latarjetadigital.com.ar/wp-content/uploads/2024/11/ffffff-blanco-icono-1.gif"
+            alt="Ubicación" width="60" />
+        </div>
+        <h4>¿DÓNDE?</h4>
+        <p>SALÓN CANZONIERI PARK<br />TUCUMÁN</p>
+        <button class="btn-modal" onclick="openModal('mapModal')">
+          VER MAPA
+        </button>
+      </div>
+    </section>
+
+    <!-- Carrusel de fotos y videos -->
+    <section class="media-carousel-section">
+      <div class="media-carousel">
+        <div class="media-carousel-track">
+          <div class="media-slide active">
+            <img src="assets/ca-1.jpeg" alt="Foto 1" />
+          </div>
+          <div class="media-slide">
+            <img src="assets/ca-2.jpeg" alt="Foto 2" />
+          </div>
+          <div class="media-slide">
+            <img src="assets/ca-3.jpeg" alt="Foto 3" />
+          </div>
+        </div>
+        <button class="media-carousel-btn prev" onclick="changeMediaSlide(-1)">&#10094;</button>
+        <button class="media-carousel-btn next" onclick="changeMediaSlide(1)">&#10095;</button>
+        <div class="media-carousel-dots" id="mediaCarouselDots"></div>
+      </div>
+    </section>
+
+    <!-- Versículo bíblico -->
+    <section class="bible-verse">
+      <div class="separator"></div>
+      <h3 style="margin-bottom: 10px;">
+        CUANDO TE DAS CUENTA QUE QUERÉS PASAR EL RESTO DE TU VIDA CON ALGUIEN, DESEÁS QUE EL RESTO DE TU VIDA EMPIECE LO
+        ANTES POSIBLE
+      </h3>
+      <img src="assets/corazon.png" height="30" alt="" srcset="">
+      <div class="separator"></div>
+    </section>
+
+    <!-- Dress Code -->
+    <section class="dress-code">
+      <img decoding="async"
+        src="https://latarjetadigital.com.ar/wp-content/uploads/2024/11/707f62-verde-oliva-oscuro-icono-20.gif" alt=""
+        width="70" height="70" loading="lazy" />
+      <span class="section-prefix">DRESS CODE</span>
+      <h4>ELEGANTE</h4>
+      <div class="divider"></div>
+      <p>LOS COLORES <strong>VERDE</strong> Y <strong>BLANCO</strong><br /> SE RESERVA PARA LOS NOVIOS</p>
+    </section>
+
+    <!-- Sección de Regalos -->
+    <section class="gifts-section">
+      <div class="info-icon">
+        <img src="https://latarjetadigital.ar/wp-content/uploads/2024/11/ffffff-blanco-icono-12.gif" alt="Regalos"
+          width="70" />
+      </div>
+      <p>NUESTRO MEJOR REGALO ES TU PRESENCIA EN ESTE DÍA TAN ESPECIAL PARA NOSOTROS, PERO SI QUIERES BENDECIRNOS DE
+        OTRA MANERA, PODES HACERLO ACÁ</p>
+      <button class="btn-primary" onclick="openModal('gift-modal')">VER</button>
+    </section>
+
+    <!-- Modal para Regalo -->
+    <div id="gift-modal" class="modal">
+      <div class="modal-content modal-gifts">
+        <span class="close" onclick="closeModal('gift-modal')">&times;</span>
+        <div class="modal-body">
+          <div class="info-icon">
+            <i class="fas fa-gift"></i>
+          </div>
+          <h3>LISTA DE REGALOS</h3>
+          <p class="gifts-subtitle">Elegí con qué te gustaría contribuir</p>
+
+          <!-- Carrusel de regalos -->
+          <div class="gifts-carousel-container">
+            <button class="carousel-btn carousel-prev" onclick="changeGift(-1)">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <div class="gifts-carousel">
+              <!-- Gift 1: Sillón -->
+              <div class="gift-card active" data-gift="0">
+                <div class="gift-card-inner">
+                  <div class="gift-card-front">
+                    <div class="gift-icon">
+                      <i class="fas fa-couch"></i>
+                    </div>
+                    <h4 class="gift-name">Sillón</h4>
+                    <button class="btn-primary btn-gift" onclick="flipCard(0)">Contribuir</button>
+                  </div>
+                  <div class="gift-card-back">
+                    <h4 class="back-title">Contribuir con Sillón</h4>
+                    <div class="back-content">
+                      <div class="back-account">
+                        <p><strong>Alias:</strong>
+                        <p>AYD-03.04.2026</p>
+                        </p>
+                        <p><strong>CBU:</strong>
+                        <p>4530000800010237396056</p>
+                        </p>
+                        <p><strong>Titular:</strong>
+                        <p>Debora Melisa Rynkiewicz</p>
+                        </p>
+                      </div>
+                    </div>
+                    <button class="btn-secondary btn-gift" onclick="flipCard(0)">Volver</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gift 2: Heladera -->
+              <div class="gift-card" data-gift="1">
+                <div class="gift-card-inner">
+                  <div class="gift-card-front">
+                    <div class="gift-icon">
+                      <i class="fas fa-temperature-low"></i>
+                    </div>
+                    <h4 class="gift-name">Heladera</h4>
+                    <button class="btn-primary btn-gift" onclick="flipCard(1)">Contribuir</button>
+                  </div>
+                  <div class="gift-card-back">
+                    <h4 class="back-title">Contribuir con Heladera</h4>
+                    <div class="back-content">
+                      <div class="back-account">
+                        <p><strong>Alias:</strong>
+                        <p>AYD-03.04.2026</p>
+                        </p>
+                        <p><strong>CBU:</strong>
+                        <p>4530000800010237396056</p>
+                        </p>
+                        <p><strong>Titular:</strong>
+                        <p>Debora Melisa Rynkiewicz</p>
+                        </p>
+                      </div>
+                    </div>
+                    <button class="btn-secondary btn-gift" onclick="flipCard(1)">Volver</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gift 3: Televisor -->
+              <div class="gift-card" data-gift="2">
+                <div class="gift-card-inner">
+                  <div class="gift-card-front">
+                    <div class="gift-icon">
+                      <i class="fas fa-tv"></i>
+                    </div>
+                    <h4 class="gift-name">Televisor</h4>
+                    <button class="btn-primary btn-gift" onclick="flipCard(2)">Contribuir</button>
+                  </div>
+                  <div class="gift-card-back">
+                    <h4 class="back-title">Contribuir con Televisor</h4>
+                    <div class="back-content">
+                      <div class="back-account">
+                        <p><strong>Alias:</strong>
+                        <p>AYD-03.04.2026</p>
+                        </p>
+                        <p><strong>CBU:</strong>
+                        <p>4530000800010237396056</p>
+                        </p>
+                        <p><strong>Titular:</strong>
+                        <p>Debora Melisa Rynkiewicz</p>
+                        </p>
+                      </div>
+                    </div>
+                    <button class="btn-secondary btn-gift" onclick="flipCard(2)">Volver</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gift 4: Cama -->
+              <div class="gift-card" data-gift="3">
+                <div class="gift-card-inner">
+                  <div class="gift-card-front">
+                    <div class="gift-icon">
+                      <i class="fas fa-bed"></i>
+                    </div>
+                    <h4 class="gift-name">Cama</h4>
+                    <button class="btn-primary btn-gift" onclick="flipCard(3)">Contribuir</button>
+                  </div>
+                  <div class="gift-card-back">
+                    <h4 class="back-title">Contribuir con Cama</h4>
+                    <div class="back-content">
+                      <div class="back-account">
+                        <p><strong>Alias:</strong>
+                        <p>AYD-03.04.2026</p>
+                        </p>
+                        <p><strong>CBU:</strong>
+                        <p>4530000800010237396056</p>
+                        </p>
+                        <p><strong>Titular:</strong>
+                        <p>Debora Melisa Rynkiewicz</p>
+                        </p>
+                      </div>
+                    </div>
+                    <button class="btn-secondary btn-gift" onclick="flipCard(3)">Volver</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gift 5: Mesa de Comedor -->
+              <div class="gift-card" data-gift="4">
+                <div class="gift-card-inner">
+                  <div class="gift-card-front">
+                    <div class="gift-icon">
+                      <i class="fas fa-utensils"></i>
+                    </div>
+                    <h4 class="gift-name">Mesa de Comedor</h4>
+                    <button class="btn-primary btn-gift" onclick="flipCard(4)">Contribuir</button>
+                  </div>
+                  <div class="gift-card-back">
+                    <h4 class="back-title">Contribuir con Mesa</h4>
+                    <div class="back-content">
+                      <div class="back-account">
+                        <p><strong>Alias:</strong>
+                        <p>AYD-03.04.2026</p>
+                        </p>
+                        <p><strong>CBU:</strong>
+                        <p>4530000800010237396056</p>
+                        </p>
+                        <p><strong>Titular:</strong>
+                        <p>Debora Melisa Rynkiewicz</p>
+                        </p>
+                      </div>
+                    </div>
+                    <button class="btn-secondary btn-gift" onclick="flipCard(4)">Volver</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gift 6: Microondas -->
+              <div class="gift-card" data-gift="5">
+                <div class="gift-card-inner">
+                  <div class="gift-card-front">
+                    <div class="gift-icon">
+                      <i class="fas fa-blender"></i>
+                    </div>
+                    <h4 class="gift-name">Microondas</h4>
+                    <button class="btn-primary btn-gift" onclick="flipCard(5)">Contribuir</button>
+                  </div>
+                  <div class="gift-card-back">
+                    <h4 class="back-title">Contribuir con Microondas</h4>
+                    <div class="back-content">
+                      <div class="back-account">
+                        <p><strong>Alias:</strong>
+                        <p>AYD-03.04.2026</p>
+                        </p>
+                        <p><strong>CBU:</strong>
+                        <p>4530000800010237396056</p>
+                        </p>
+                        <p><strong>Titular:</strong>
+                        <p>Debora Melisa Rynkiewicz</p>
+                        </p>
+                      </div>
+                    </div>
+                    <button class="btn-secondary btn-gift" onclick="flipCard(5)">Volver</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gift 7: Cocina -->
+              <div class="gift-card" data-gift="6">
+                <div class="gift-card-inner">
+                  <div class="gift-card-front">
+                    <div class="gift-icon">
+                      <i class="fas fa-fire"></i>
+                    </div>
+                    <h4 class="gift-name">Cocina</h4>
+                    <p class="gift-value">$250.000</p>
+                    <button class="btn-primary btn-gift" onclick="flipCard(6)">Contribuir</button>
+                  </div>
+                  <div class="gift-card-back">
+                    <h4 class="back-title">Contribuir con Cocina</h4>
+                    <div class="back-content">
+                      <div class="back-account">
+                        <p><strong>Alias:</strong>
+                        <p>AYD-03.04.2026</p>
+                        </p>
+                        <p><strong>CBU:</strong>
+                        <p>4530000800010237396056</p>
+                        </p>
+                        <p><strong>Titular:</strong>
+                        <p>Debora Melisa Rynkiewicz</p>
+                        </p>
+                      </div>
+                    </div>
+                    <button class="btn-secondary btn-gift" onclick="flipCard(6)">Volver</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gift 8: Luna de Miel -->
+              <div class="gift-card" data-gift="7">
+                <div class="gift-card-inner">
+                  <div class="gift-card-front">
+                    <div class="gift-icon">
+                      <i class="fas fa-plane-departure"></i>
+                    </div>
+                    <h4 class="gift-name">Luna de Miel</h4>
+                    <p class="gift-value">Libre</p>
+                    <button class="btn-primary btn-gift" onclick="flipCard(7)">Contribuir</button>
+                  </div>
+                  <div class="gift-card-back">
+                    <h4 class="back-title">Contribuir con Luna de Miel</h4>
+                    <div class="back-content">
+                      <p class="back-amount">Monto a tu elección</p>
+                      <div class="back-account">
+                        <p><strong>Alias:</strong>
+                        <p>AYD-03.04.2026</p>
+                        </p>
+                        <p><strong>CBU:</strong>
+                        <p>4530000800010237396056</p>
+                        </p>
+                        <p><strong>Titular:</strong>
+                        <p>Debora Melisa Rynkiewicz</p>
+                        </p>
+                      </div>
+                    </div>
+                    <button class="btn-secondary btn-gift" onclick="flipCard(7)">Volver</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="carousel-btn carousel-next" onclick="changeGift(1)">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+
+          <div class="carousel-dots" id="giftDots"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Información personalizada del invitado -->
+    <section class="guest-info" id="infoInvitado">
+      <div>
+        <strong id="nombreInvitado2">INVITADO ESPECIAL</strong>
+        <span id="mensajePases">HAY 1 LUGAR<br />RESERVADO PARA VOS</span>
+      </div>
+    </section>
+
+    <!-- Confirmación de asistencia -->
+    <section class="confirmation-section">
+      <div class="info-icon">
+        <img src="https://latarjetadigital.com.ar/wp-content/uploads/2024/11/ffffff-blanco-icono-8.gif" alt="Confirmar"
+          width="60" />
+      </div>
+      <h5>CONFIRMÁ TU ASISTENCIA</h5>
+      <p>ANTES DEL 10 DE NOVIEMBRE 2026</p>
+      <button class="btn-modal btn-large" onclick="openModal('confirmModal')">
+        CONFIRMAR ASISTENCIA
+      </button>
+    </section>
+
+    <!-- Firma de los novios -->
+    <section class="signature">
+      <h5>GASPAR & VALERIA</h5>
+      <p>LOS ESPERAMOS CON MUCHA <br />ALEGRIA</p>
+    </section>
+  </main>
+
+  <!-- ============================================
+         MODALES
+    ============================================ -->
+
+  <!-- MODAL: MAPA -->
+  <div id="mapModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('mapModal')">&times;</span>
+      <h3>Ubicación del Evento</h3>
+      <div class="modal-body">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.0171141523874!2d-65.32786102411707!3d-26.80758368882024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942243e00ed4b3eb%3A0xa64ea21de74defe9!2sCanzonieri%20park!5e0!3m2!1ses-419!2sar!4v1792878772938!5m2!1ses-419!2sar"
+          title="Mapa del Salón Canzonieri Park, Tucumán" width="100%" height="400" style="border:0;" allowfullscreen=""
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Formulario -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('confirmModal')">&times;</span>
+      <h3>CONFIRMAR ASISTENCIA</h3>
+      <form id="confirmation-form">
+        <div class="form-group" style="text-align: center;">
+          <b style="font-weight: 400; margin-bottom: 10px;" id="personGuest"></b>
+          <br>
+          <label>¿Confirma su asistencia al evento?</label>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="attendance" value="si" required>
+              ¡Confirmo!
+            </label>
+            <label>
+              <input type="radio" name="attendance" value="no" required>
+              No podré asistir
+            </label>
+          </div>
+        </div>
+        <button style="width: 100%;" type="submit" class="btn-primary" disabled>CONFIRMAR</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================
+         BOTÓN DE MÚSICA FLOTANTE
+    ============================================ -->
+  <button id="musicButton" aria-label="Controlar música">
+    <i class="fas fa-pause"></i>
+  </button>
+
+  <!-- ============================================
+         REPRODUCTOR DE YOUTUBE (OCULTO)
+    ============================================ -->
+  <div id="video-container" style="
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        position: fixed;
+        left: -9999px;
+        top: -9999px;
+      ">
+    <div id="player"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
